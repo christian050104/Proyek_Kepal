@@ -4,17 +4,17 @@
         <div class="row">
             <div class="col-lg-3 col-md-6">
                 <div class="footer-box about-widget">
-                    <h2 class="widget-title">About us</h2>
-                    <p>Ut enim ad minim veniam perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae.</p>
+                    <h2 class="widget-title">About Us</h2>
+                    <p>Website ini dikembangkan oleh mahasiswa Institut Teknologi Del semester 5 untuk memenuhi tugas dan proyek pengembangan aplikasi web.</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6">
                 <div class="footer-box get-in-touch">
                     <h2 class="widget-title">Get in Touch</h2>
                     <ul>
-                        <li>34/8, East Hukupara, Gifirtok, Sadan.</li>
-                        <li>support@fruitkha.com</li>
-                        <li>+00 111 222 3333</li>
+                        <li>Jl. Sitoluama, Laguboti, Toba, Sumatera Utara</li>
+                        <li>support@itdel.ac.id</li>
+                        <li>+62 123 456 7890</li>
                     </ul>
                 </div>
             </div>
@@ -49,8 +49,8 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6 col-md-12">
-                <p>Copyrights &copy; 2019 - <a href="https://imransdesign.com/">Imran Hossain</a>,  All Rights Reserved.<br>
-                    Distributed By - <a href="https://themewagon.com/">Themewagon</a>
+                <p>Copyrights &copy; 2024 - Mahasiswa IT Del Semester 5, All Rights Reserved.<br>
+                    Distributed By - <a href="https://itdel.ac.id">Institut Teknologi Del</a>
                 </p>
             </div>
             <div class="col-lg-6 text-right col-md-12">
@@ -69,7 +69,7 @@
 </div>
 <!-- end copyright -->
 
-	<!-- jQuery -->
+    <!-- jQuery -->
 <script src="{{ asset('assets/js/jquery-1.11.3.min.js') }}"></script>
 <!-- Bootstrap -->
 <script src="{{ asset('assets/bootstrap/js/bootstrap.min.js') }}"></script>
@@ -89,7 +89,6 @@
 <script src="{{ asset('assets/js/sticker.js') }}"></script>
 <!-- Main JS -->
 <script src="{{ asset('assets/js/main.js') }}"></script>
-
 
 </body>
 </html>

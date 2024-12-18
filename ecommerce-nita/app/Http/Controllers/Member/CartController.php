@@ -3,37 +3,64 @@
 namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
-use App\Models\Product;
+use App\Models\Produk;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    public function addToCart($id)
-    {
-        $product = Product::findOrFail($id);
-
-        $cart = session()->get('cart', []);
-        $cart[$id] = [
-            "name" => $product->name,
-            "quantity" => isset($cart[$id]) ? $cart[$id]['quantity'] + 1 : 1,
-            "price" => $product->price,
-            "encrypted_price" => encrypt($product->price),
-        ];
-
-        session()->put('cart', $cart);
-        return redirect()->back()->with('success', 'Product added to cart!');
-    }
-
-    public function showCart()
-    {
-        return view('member.cart.index', ['cart' => session('cart')]);
-    }
-
-    public function removeCartItem($id)
+    // Menampilkan Keranjang
+    public function index()
     {
         $cart = session()->get('cart', []);
-        unset($cart[$id]);
+        return view('member.cart.index', compact('cart'));
+    }
+
+    // Menambahkan Produk ke Keranjang
+    public function add($id, Request $request)
+    {
+        $product = Produk::findOrFail($id);
+
+        $cart = session()->get('cart', []);
+        if (isset($cart[$id])) {
+            $cart[$id]['quantity']++;
+        } else {
+            $cart[$id] = [
+                'name' => $product->name,
+                'price' => $product->price,
+                'quantity' => 1,
+                'image' => $product->image,
+            ];
+        }
         session()->put('cart', $cart);
-        return redirect()->back()->with('success', 'Product removed!');
+
+        return redirect()->route('member.cart.index')->with('success', 'Product added to cart!');
+    }
+
+    // Mengurangi Jumlah Produk di Keranjang
+    public function decrement($id)
+    {
+        $cart = session()->get('cart', []);
+        if (isset($cart[$id])) {
+            if ($cart[$id]['quantity'] > 1) {
+                $cart[$id]['quantity']--;
+            } else {
+                unset($cart[$id]);
+            }
+        }
+        session()->put('cart', $cart);
+
+        return redirect()->route('member.cart.index')->with('success', 'Product quantity updated!');
+    }
+
+    // Menghapus Produk dari Keranjang
+    public function remove($id)
+    {
+        $cart = session()->get('cart', []);
+        if (isset($cart[$id])) {
+            unset($cart[$id]);
+        }
+        session()->put('cart', $cart);
+
+        return redirect()->route('member.cart.index')->with('success', 'Product removed from cart!');
     }
 }

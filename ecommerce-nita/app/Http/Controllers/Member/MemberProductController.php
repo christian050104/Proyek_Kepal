@@ -3,19 +3,19 @@
 namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
-use App\Models\Product;
+use App\Models\Produk; // Menggunakan model Produk
 
-class ProductController extends Controller
+class MemberProductController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
+        $products = Produk::all(); // Mengambil semua data dari model Produk
         return view('member.products.index', compact('products'));
     }
 
     public function show($id)
     {
-        $product = Product::findOrFail($id);
+        $product = Produk::findOrFail($id); // Mengambil data berdasarkan ID
         return view('member.products.show', compact('product'));
     }
 }

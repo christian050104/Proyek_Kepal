@@ -1,13 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">{{ __('Verify OTP') }}</div>
+            <div class="card shadow-lg border-0 rounded">
+                <!-- Header -->
+                <div class="card-header bg-primary text-white text-center py-4">
+                    <h3 class="mb-0">{{ __('Verify OTP') }}</h3>
+                    <small>Please enter the OTP sent to your email.</small>
+                </div>
 
-                <div class="card-body">
+                <!-- Body -->
+                <div class="card-body p-5">
                     @if(session('success'))
                         <div class="alert alert-success">
                             {{ session('success') }}
@@ -17,25 +22,22 @@
                     <form method="POST" action="{{ route('register.verify') }}">
                         @csrf
 
-                        <div class="row mb-3">
-                            <label for="otp" class="col-md-4 col-form-label text-md-end">{{ __('OTP') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="otp" type="text" class="form-control @error('otp') is-invalid @enderror" name="otp" required autofocus>
-                                @error('otp')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                        <!-- OTP -->
+                        <div class="mb-4">
+                            <label for="otp" class="form-label">{{ __('OTP') }}</label>
+                            <input id="otp" type="text" class="form-control @error('otp') is-invalid @enderror" name="otp" required autofocus placeholder="Enter your OTP">
+                            @error('otp')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Verify') }}
-                                </button>
-                            </div>
+                        <!-- Submit Button -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                {{ __('Verify') }}
+                            </button>
                         </div>
                     </form>
                 </div>

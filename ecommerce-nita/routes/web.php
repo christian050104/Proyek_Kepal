@@ -6,16 +6,17 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Member\CartController;
 use App\Http\Controllers\Member\TransactionController as MemberTransactionController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
-use App\Http\Controllers\Admin\TransactionController as AdminTransactionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Member\MemberProductController;
+use App\Http\Controllers\Member\TransactionController;
 /*
 |--------------------------------------------------------------------------
 | Halaman Utama
 |--------------------------------------------------------------------------
 */
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 /*
@@ -49,10 +50,19 @@ Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware(
 |--------------------------------------------------------------------------
 */
 Route::prefix('member')->name('member.')->middleware(['auth', 'role:member'])->group(function () {
-    // Keranjang Belanja
-    Route::get('cart', [CartController::class, 'showCart'])->name('cart.index');
-    Route::get('cart/add/{id}', [CartController::class, 'addToCart'])->name('cart.add');
-    Route::get('cart/remove/{id}', [CartController::class, 'removeCartItem'])->name('cart.remove');
+      // Keranjang Belanja
+      Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+      Route::post('/cart/{id}/add', [CartController::class, 'add'])->name('cart.add');
+      Route::post('/cart/{id}/decrement', [CartController::class, 'decrement'])->name('cart.decrement');
+      Route::post('/cart/{id}/remove', [CartController::class, 'remove'])->name('cart.remove');
+      Route::get('/cart/remove/{id}', [CartController::class, 'removeCartItem'])->name('cart.removeItem');
+
+      Route::get('/checkout', [TransactionController::class, 'checkoutForm'])->name('checkout.form');
+      Route::post('/checkout/process', [TransactionController::class, 'processCheckout'])->name('checkout.process');
+      Route::get('/transactions/{encryptedId}', [TransactionController::class, 'showTransaction'])->name('transactions.show');
+  
+    Route::get('products', [MemberProductController::class, 'index'])->name('products.index');
+    Route::get('products/{id}', [MemberProductController::class, 'show'])->name('products.show');
 
     // Checkout dan Transaksi
     Route::post('checkout', [MemberTransactionController::class, 'checkout'])->name('checkout');
@@ -73,10 +83,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
     // Manajemen Produk
     Route::resource('products', AdminProductController::class);
 
-    // Manajemen Transaksi
-    Route::get('transactions', [AdminTransactionController::class, 'index'])->name('transactions.index');
-    Route::get('transactions/{id}', [AdminTransactionController::class, 'show'])->name('transactions.show');
-    Route::post('transactions/{id}/status/{status}', [AdminTransactionController::class, 'updateStatus'])->name('transactions.updateStatus');
 });
 
 /*

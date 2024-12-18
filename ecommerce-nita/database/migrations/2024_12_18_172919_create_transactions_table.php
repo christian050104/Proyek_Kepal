@@ -16,17 +16,21 @@ class CreateTransactionsTable extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('transaction_id')->unique();
-            $table->decimal('total_payment', 10, 2);
+            $table->text('cart'); // Data keranjang dienkripsi
+            $table->text('address'); // Alamat dienkripsi
+            $table->string('phone'); // Nomor telepon dienkripsi
+            $table->decimal('total', 15, 2); // Total harga
             $table->timestamps();
-    
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
     
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
     public function down()
     {
         Schema::dropIfExists('transactions');
     }
-    
 }

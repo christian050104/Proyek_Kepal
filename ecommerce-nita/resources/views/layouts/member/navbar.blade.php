@@ -43,6 +43,8 @@
                                         <li><a href="{{ url('/shop') }}">Shop</a></li>
                                     </ul>
                                 </li>
+								<li><a href="{{ route('member.products.index') }}">Products</a></li>
+
                                 <li><a href="{{ url('/news') }}">News</a>
                                     <ul class="sub-menu">
                                         <li><a href="{{ url('/news') }}">News</a></li>
@@ -60,9 +62,10 @@
                                 </li>
                                 <li>
                                     <div class="header-icons d-inline-flex">
-                                        <a class="shopping-cart" href="{{ url('/cart') }}">
-                                            <i class="fas fa-shopping-cart"></i>
-                                        </a>
+                                        <a class="shopping-cart" href="{{ route('member.cart.index') }}">
+											<i class="fas fa-shopping-cart"></i>
+										</a>
+										
                                         <a class="mobile-hide search-bar-icon" href="#">
                                             <i class="fas fa-search"></i>
                                         </a>
@@ -211,7 +214,7 @@
 	</div>
 	<!-- end home page slider -->
 
-	<!-- features list section -->
+	{{-- <!-- features list section -->
 	<div class="list-section pt-80 pb-80">
 		<div class="container">
 
@@ -253,9 +256,9 @@
 
 		</div>
 	</div>
-	<!-- end features list section -->
+	<!-- end features list section --> --}}
 
-	<!-- product section -->
+	{{-- <!-- product section -->
 	<div class="product-section mt-150 mb-150">
 		<div class="container">
 			<div class="row">
@@ -310,9 +313,9 @@
 			</div>
 		</div>
 	</div>
-	<!-- end product section -->
+	<!-- end product section --> --}}
 
-	<!-- cart banner section -->
+	{{-- <!-- cart banner section -->
 	<section class="cart-banner pt-100 pb-100">
     	<div class="container">
         	<div class="row clearfix">
@@ -526,7 +529,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> --}}
 	<!-- end logo carousel -->
     <!-- jQuery -->
     <script src="{{ asset('assets/js/jquery-1.11.3.min.js') }}"></script>
